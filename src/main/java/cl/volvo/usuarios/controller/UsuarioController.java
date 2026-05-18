@@ -20,8 +20,8 @@ public class UsuarioController {
     @Autowired
     private UsuarioService usuarioService;
 
-    // Endpoint para registrar un usuario (POST)
-    @PostMapping
+    // Endpoint para registrar un usuario: http://localhost:8085/api/v0/usuarios/crear
+    @PostMapping("/crear")
     public ResponseEntity<UsuarioResponseDTO> registrarUsuario(@Valid @RequestBody UsuarioRequestDTO requestDTO) {
         log.info("Petición REST recibida para registrar usuario: {}", requestDTO.getUsername());
         
@@ -31,8 +31,8 @@ public class UsuarioController {
         return new ResponseEntity<>(nuevoUsuario, HttpStatus.CREATED); 
     }
 
-    // Endpoint para obtener todos los usuarios (GET)
-    @GetMapping
+    // Endpoint para obtener todos los usuarios: http://localhost:8085/api/v0/usuarios/listar
+    @GetMapping("/listar")
     public ResponseEntity<List<UsuarioResponseDTO>> obtenerTodos() {
         log.info("Petición REST recibida para listar usuarios");
         
@@ -40,8 +40,8 @@ public class UsuarioController {
         return ResponseEntity.ok(usuarios); // Retornamos código 200 (OK)
     }
 
-    // Endpoint para obtener un usuario específico por su ID (GET)
-    @GetMapping("/{id}")
+    // Endpoint para obtener un usuario específico por su ID: http://localhost:8085/api/v0/usuarios/buscar/1
+    @GetMapping("/buscar/{id}")
     public ResponseEntity<UsuarioResponseDTO> obtenerPorId(@PathVariable Long id) {
         log.info("Petición REST recibida para buscar usuario ID: {}", id);
         
@@ -49,8 +49,8 @@ public class UsuarioController {
         return ResponseEntity.ok(usuario); // Retornamos código 200 (OK)
     }
 
-    // Endpoint para actualizar un usuario (PUT)
-    @PutMapping("/{id}")
+    // Endpoint para actualizar un usuario: http://localhost:8085/api/v0/usuarios/actualizar/1
+    @PutMapping("/actualizar/{id}")
     public ResponseEntity<UsuarioResponseDTO> actualizarUsuario(
             @PathVariable Long id, 
             @Valid @RequestBody UsuarioRequestDTO requestDTO) {
@@ -62,8 +62,8 @@ public class UsuarioController {
         return ResponseEntity.ok(usuarioActualizado);
     }
 
-    // Endpoint para eliminar un usuario (DELETE)
-    @DeleteMapping("/{id}")
+    // Endpoint para eliminar un usuario: http://localhost:8085/api/v0/usuarios/eliminar/1
+    @DeleteMapping("/eliminar/{id}")
     public ResponseEntity<Void> eliminarUsuario(@PathVariable Long id) {
         log.info("Petición REST recibida para eliminar el usuario ID: {}", id);
         usuarioService.eliminarUsuario(id);
