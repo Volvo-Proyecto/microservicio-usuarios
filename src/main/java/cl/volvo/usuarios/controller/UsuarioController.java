@@ -14,14 +14,14 @@ import java.util.List;
 
 @Slf4j
 @RestController
-@RequestMapping("/api/v1/usuarios") // Esta será la ruta principal: localhost:8081/usuarios
+@RequestMapping("/api/v1/usuarios") // Esta será la ruta principal: localhost:8085/usuarios
 public class UsuarioController {
 
     @Autowired
     private UsuarioService usuarioService;
 
     // Endpoint para registrar un usuario: http://localhost:8085/api/v0/usuarios/crear
-    @PostMapping("/crear")
+    @PostMapping()
     public ResponseEntity<UsuarioResponseDTO> registrarUsuario(@Valid @RequestBody UsuarioRequestDTO requestDTO) {
         log.info("Petición REST recibida para registrar usuario: {}", requestDTO.getUsername());
         
@@ -32,7 +32,7 @@ public class UsuarioController {
     }
 
     // Endpoint para obtener todos los usuarios: http://localhost:8085/api/v0/usuarios/listar
-    @GetMapping("/listar")
+    @GetMapping()
     public ResponseEntity<List<UsuarioResponseDTO>> obtenerTodos() {
         log.info("Petición REST recibida para listar usuarios");
         
@@ -41,7 +41,7 @@ public class UsuarioController {
     }
 
     // Endpoint para obtener un usuario específico por su ID: http://localhost:8085/api/v0/usuarios/buscar/1
-    @GetMapping("/buscar/{id}")
+    @GetMapping("{id}")
     public ResponseEntity<UsuarioResponseDTO> obtenerPorId(@PathVariable Long id) {
         log.info("Petición REST recibida para buscar usuario ID: {}", id);
         
@@ -50,7 +50,7 @@ public class UsuarioController {
     }
 
     // Endpoint para actualizar un usuario: http://localhost:8085/api/v0/usuarios/actualizar/1
-    @PutMapping("/actualizar/{id}")
+    @PutMapping("{id}")
     public ResponseEntity<UsuarioResponseDTO> actualizarUsuario(
             @PathVariable Long id, 
             @Valid @RequestBody UsuarioRequestDTO requestDTO) {
@@ -63,7 +63,7 @@ public class UsuarioController {
     }
 
     // Endpoint para eliminar un usuario: http://localhost:8085/api/v0/usuarios/eliminar/1
-    @DeleteMapping("/eliminar/{id}")
+    @DeleteMapping("{id}")
     public ResponseEntity<Void> eliminarUsuario(@PathVariable Long id) {
         log.info("Petición REST recibida para eliminar el usuario ID: {}", id);
         usuarioService.eliminarUsuario(id);
