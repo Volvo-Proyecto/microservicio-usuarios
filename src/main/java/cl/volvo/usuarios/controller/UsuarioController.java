@@ -14,7 +14,7 @@ import java.util.List;
 
 @Slf4j
 @RestController
-@RequestMapping("/api/v0/usuarios") // Esta será la ruta principal: localhost:8081/usuarios
+@RequestMapping("/api/v1/usuarios") // Esta será la ruta principal: localhost:8081/usuarios
 public class UsuarioController {
 
     @Autowired
